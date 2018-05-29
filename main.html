@@ -1,0 +1,219 @@
+<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
+<div class="container-fluid" id="blog">
+    <div class="top-area">
+        <img src="https://s3.amazonaws.com/goorooblogimages/College+brochure.jpg" class="top-image">
+        <div class="transparent-cover"></div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="header-section">
+                <div class="topics">
+                    <button class="btn btn-gooroo topic-btn" ng-click="topToggle()">Topics &nbsp;&#9662;</button>
+                </div>
+                <div class="search">
+                    <form action="blog/search" method="get" class="search-bar">
+                        <input type="text" name="q" placeholder=" Search" autocomplete="off" class="searchbox" id="searchbar">
+                        <input type="submit" value="Go" class="btn btn-gooroo go-btn">
+                    </form>
+                    <div class="search-icon" id="opensearch"><img src="public/assets/img/blog/search.svg"></div>
+                </div> 
+                <div class="topic-section" ng-show="showTopics">
+                    <div class="topic-tags" ng-repeat="topic in topics" ng-click="clickTopic(topic)" onkeypress="this.style.width = ((this.value.length + 1) * 8) + 'px';">#{{topic}}</div>
+                </div>
+                <div class="top-text" ng-click="onClick(main)">Gooroo Blog</a></div>
+                <div class="top-small-text">Where parents, students, and tutors can share their thoughts.</div>
+                <div class="col-xs-6 col-md-6 padding-top">
+                    <div class="wrapper">
+                        <button class="btn btn-gooroo sb-button" ng-click="sbToggle()">Subscribe</button>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <ul class="sb-menu left-menu on-hover" ng-show="sbMenu">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <li align="center">
+                            <p><b>Subscribe to our blog!</b></p>
+                            <form action="https://docs.google.com/a/gooroo.com/forms/d/e/1FAIpQLSdmVZlIlypTPKRUD7Vv_-SDKYM-sG-VWBysVW-K-rvU4342Bw/formResponse" target="_blank" method="post" id="mG61Hd" class="wrapper">
+                            <input type="text" id="email" autocomplete="off" class="textbox p2" placeholder="Email Address" name="entry.1206746750" required><br><br>
+                            <input type="submit" class="btn btn-gooroo submit-btn" value="SUBMIT" name="submit"></p></form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- web format -->
+            <div class="main-section box" style="padding-top: 10px" id="web-only">
+                <div class="col-xs-12 col-md-8 padding-left" id="clickedTopicPost">
+                    <h2 ng-hide="topicClicked">Newest Posts</h2>
+                    <h2 ng-show="topicClicked">{{clickedTopic}} Posts</h2>  
+                    <div class="showAll" ng-show="topicClicked" ng-click="showAllPosts()">SHOW ALL</div>
+                </div>
+                
+                <div class="col-xs-12 col-md-4 padding-right" id="big-web">
+                    <h2>Popular Posts</h2>
+                </div>
+
+                <div class="col-xs-12 no-padding col-md-8 padding-left" id="web-only">  
+                    <!-- <div id="fb-root"></div> -->
+                    <ul class="blogposts">
+                        <li class="col-md-12 no-padding" ng-repeat="post in posts | limitTo:quantity" ng-hide="topicClicked && !topicMatch(post)">
+                            <div class="col-xs-3 padding-top col-md-3" ng-if="post.authorLink">
+                                <div class="wrapper">
+                                    <a href="{{post.authorLink}}"><img src="{{post.img}}"></a>
+                                </div>
+                                <div class="wrapper">
+                                    <div class="fb-like" data-href="https://gooroo.com/blog/{{post.id}}" data-width="40px" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div> 
+                                </div>
+                            </div>
+                            <div class="col-xs-3 padding-top col-md-3" ng-if="!post.authorLink">
+                                <div class="wrapper">
+                                    <img src="{{post.img}}">
+                                </div>
+                                <div class="wrapper">
+                                    <div class="fb-like" data-href="https://gooroo.com/blog/{{post.id}}" data-width="40px" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div> 
+                                </div>
+                            </div>
+                            <div class="col-xs-9 col-md-9">
+                                <p class="date">
+                                    {{post.date}}
+                                </p>
+                                <p class="title">
+                                    <a ui-sref="getPostLink()" ng-click="onClick(post)" class="big">{{post.title}}</a>
+                                </p>
+                                <p class="author" ng-if="post.authorLink">
+                                    By <a href="{{post.authorLink}}">{{post.author}}</a>
+                                </p>
+                                <p class="author" ng-if="!post.authorLink">
+                                    By {{post.author}}
+                                </p>
+                                <p>
+                                    {{post.preview |limitTo: 250}}... <a ui-sref="getPostLink()" class="small">Read More</a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="blogposts">
+                        <li class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4 no-padding showMore" ng-show="quantity < posts.length">
+                            <button class="btn btn-gooroo" ng-click="showMore(); reloadLikes()">
+                                SHOW MORE POSTS
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-12" id="small-web">
+                    <h2>Popular Posts</h2>
+                </div>
+                <div class="col-xs-12 no-padding col-md-4 padding-right" id="web-only">
+                    <ul class="popular">
+                        <li class="col-md-12 no-padding" ng-repeat="popularPost in popularPosts | limitTo:5">
+                            <div class="col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1">
+                                <p ng-if="popularPost.authorLink">
+                                    <a href="{{popularPost.authorLink}}"><img src="{{popularPost.img}}"></a>
+                                </p>
+                                <p ng-if="!popularPost.authorLink">
+                                    <img src="{{popularPost.img}}">
+                                </p>
+                                <p class="title">
+                                    <a href="/blog/{{popularPost.id}}" class="big" ng-click="onClick(popularPost)">
+                                        {{popularPost.title}}
+                                    </a>
+                                </p>
+                                <p class="date">{{popularPost.date}}</p>
+                                <p class="author" ng-if="popularPost.authorLink">
+                                    By <a href="{{popularPost.authorLink}}">{{popularPost.author}}</a><br />
+                                </p>
+                                <p class="author" ng-if="!popularPost.authorLink">
+                                    By {{popularPost.author}}<br />
+                                </p>
+                                <div class="fb-like" data-href="https://gooroo.com/blog/{{popularPost.id}}" data-width="40px" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false" style="margin-bottom: 20px"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- mobile format -->
+            <div class="main-section" id="mobile-only">
+                <div class="col-xs-12" ng-hide="topicClicked">
+                    <h2>Popular Posts</h2>
+                </div>
+                <div class="col-xs-12" ng-hide="topicClicked">
+                    <ul class="popular">
+                        <li class="col-md-12 no-padding" ng-repeat="popularPost in popularPosts | limitTo:5">
+                            <div class="col-xs-10 col-xs-offset-1">
+                                <p ng-if="popularPost.authorLink">
+                                    <a href="{{popularPost.authorLink}}"><img src="{{popularPost.img}}"></a>
+                                </p>
+                                <p ng-if="!popularPost.authorLink">
+                                    <img src="{{popularPost.img}}">
+                                </p>
+                                <p class="title">
+                                    <a ui-sref="getPopPostLink()" class="big" ng-click="onClick(popularPost)">
+                                        {{popularPost.title}}
+                                    </a>
+                                </p>
+                                <div class="fb-like" data-href="https://gooroo.com/blog/{{popularPost.id}}" data-width="40px" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false" style="margin-bottom: 5px"></div>
+                                <div id="fbl"></div>
+                                <p class="date">{{popularPost.date}}</p>
+                                <p class="author" ng-if="popularPost.authorLink">
+                                    By <a href="{{popularPost.authorLink}}">{{popularPost.author}}</a><br />
+                                </p>
+                                <p class="author" ng-if="!popularPost.authorLink">
+                                    By {{popularPost.author}}<br />
+                                </p>
+                                <p>
+                                    {{popularPost.preview | limitTo: 250}}... <a ui-sref="getPopPostLink()" class="small">Read More</a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-12" id="clickedTopicPost">
+                    <h2 ng-hide="topicClicked">Newest Posts</h2>
+                    <h2 ng-show="topicClicked">{{clickedTopic}} Posts</h2>
+                    <div class="showAll" ng-show="topicClicked" ng-click="showAllPosts()">SHOW ALL</div>
+                </div>
+                <div class="col-xs-12">  
+                    <ul class="popular">
+                        <li class="col-md-12 no-padding" ng-repeat="post in posts | limitTo:quantity" ng-hide="topicClicked && !topicMatch(post)">
+                            <div class="col-xs-10 col-xs-offset-1">
+                                <p ng-if="post.authorLink">
+                                    <a href="{{post.authorLink}}"><img src="{{post.img}}"></a>
+                                </p>
+                                <p ng-if="!post.authorLink">
+                                    <img src="{{post.img}}">
+                                </p>
+                                <p class="title">
+                                    <a ui-sref="getPostLink()" class="big" ng-click="onClick(post)">
+                                        {{post.title}}
+                                    </a>
+                                </p>
+                                <div class="fb-like" data-href="https://gooroo.com/blog/{{post.id}}" data-width="40px" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false" style="margin-bottom: 5px"></div>
+                                <div id="fbl"></div>
+                                <p class="date">{{post.date}}</p>
+                                <p class="author" ng-if="post.authorLink">
+                                    By <a href="{{post.authorLink}}">{{post.author}}</a><br />
+                                </p>
+                                <p class="author" ng-if="!post.authorLink">
+                                    By {{post.author}}<br />
+                                </p>
+                                <p>
+                                    {{post.preview | limitTo: 250}}... <a href="blog({post.id})" class="small">Read More</a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="popular">
+                        <li class="col-xs-8 col-xs-offset-2 no-padding showMore" ng-show="quantity < posts.length">
+                            <button class="btn btn-gooroo" ng-click="showMore()">
+                                SHOW MORE POSTS
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
