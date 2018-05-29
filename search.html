@@ -1,0 +1,91 @@
+<div class="container-fluid" id="blog">
+    <div class="top-area">
+        <img src="https://s3.amazonaws.com/goorooblogimages/College+brochure.jpg" class="top-image">
+        <div class="transparent-cover"></div>
+    </div>
+    <div id="fb-root"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="header-section">
+                 <div class="search"> 
+                    <!-- <div class="search-bar">
+                        <div class="searchbox" ng-show="windowLoaded">
+                            <gcse:searchbox-only resultsUrl="blog/search" newWindow="false" queryParameterName="q"></gcse:searchbox-only>
+                        </div>
+                    </div> -->
+                    <form action="blog/search" method="get" class="search-bar">
+                        <input type="text" name="q" placeholder=" Search" autocomplete="off" class="searchbox" id="searchbar">
+                        <!-- <input name="sitesearch" type="hidden" value="https://gooroo.com/blog/"> -->
+                        <input type="submit" value="Go" class="btn btn-gooroo go-btn" ng-click="searchGo()">
+                    </form>
+                    <div class="search-icon" id="opensearch"><img src="public/assets/img/blog/search.svg"></div>
+                </div> 
+                <div class="top-text" ng-click="onClick(main)">Gooroo Blog</a></div>
+                <div class="top-small-text">Where parents, students, and tutors can share their thoughts.</div>
+                <div class="col-xs-6 col-md-6 padding-top">
+                    <div class="wrapper">
+                        <button class="btn btn-gooroo sb-button" ng-click="sbToggle()">Subscribe</button>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <ul class="sb-menu left-menu on-hover" ng-show="sbMenu">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        <li align="center">
+                            <p><b>Subscribe to our blog!</b></p>
+                            <form action="https://docs.google.com/a/gooroo.com/forms/d/e/1FAIpQLSdmVZlIlypTPKRUD7Vv_-SDKYM-sG-VWBysVW-K-rvU4342Bw/formResponse" target="_blank" method="post" id="mG61Hd" class="wrapper"><input type="text" id="email" autocomplete="off" class="textbox p2" placeholder="Email Address" name="entry.1206746750" required><br><br><input type="submit" class="btn btn-gooroo submit-btn" value="SUBMIT" name="submit"></p></form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-section box" style="padding-top: 10px">
+                <div class="col-xs-12 col-md-12 padding-left">
+                    <h2>{{count}} Search Results for '{{query}}'</h2>
+                </div>
+                <div class="col-xs-12 col-md-12 padding-left padding-right">
+                    <div class="search-results">
+                        <p ng-if="searchresults.length === 0 || searchresults === undefined">0 Search Results Found</p>
+                        <ul class="blogposts" ng-if="searchresults.length > 0">
+                            <li class="col-xs-12 col-md-12 no-padding" ng-repeat="searchresult in searchresults">
+                                <div class="col-xs-12 padding-top col-md-3" ng-if="searchresult.authorLink">
+                                    <div class="wrapper">
+                                        <a href="{{searchresult.authorLink}}"><img src="{{searchresult.img}}"></a>
+                                    </div>
+                                    <div class="wrapper">
+                                        <div class="fb-like no-margin" data-href="https://gooroo.com/blog/{{searchresult.id}}" data-width="40px" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 padding-top col-md-3" ng-if="!searchresult.authorLink">
+                                    <div class="wrapper">
+                                        <img src="{{searchresult.img}}">
+                                    </div>
+                                    <div class="wrapper">
+                                        <div class="fb-like no-margin" data-href="https://gooroo.com/blog/{{searchresult.id}}" data-width="40px" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-9">
+                                    <p class="date">
+                                        {{searchresult.date}}
+                                    </p>
+                                    <p class="title">
+                                        <a ui-sref="getPostLink()" ng-click="onClick(searchresult)" class="big">{{searchresult.title}}</a>
+                                    </p>
+                                    <p class="author" ng-if="searchresult.authorLink">
+                                        By <a href="{{searchresult.authorLink}}">{{searchresult.author}}</a>
+                                    </p>
+                                    <p class="author" ng-if="!searchresult.authorLink">
+                                        By {{searchresult.author}}
+                                    </p>
+                                    <p>
+                                        {{searchresult.preview |limitTo: 250}}... <a ui-sref="getPostLink()" class="small">Read More</a>
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
