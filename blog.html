@@ -1,0 +1,79 @@
+<div class="container-fluid" id="blog">
+    <div id="content" class="mobile-home" ng-if="currentPost.title==='Home' || currentPost.title==='Search'"> 
+        <div ng-include src="currentPost.url" class="animate-if main-view"></div>
+    </div> 
+    <div id="fb-root"></div>
+    <div class="container" ng-if="currentPost.title!=='Home' && currentPost.title!=='Search'">
+        <div class="row">
+            <div class="col-xs-12 col-md-12" id="post-content">
+                <div ng-include src="currentPost.url" class="animate-if main-view"></div>
+            </div> 
+            <div class="col-xs-12 col-md-12" ng-if="!currentPost.specialDscrpt">
+                <div class="feature-author"> 
+                    <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                        <div class="photo-part" ng-if="currentPost.authorLink">
+                            <a href="{{currentPost.authorLink}}"><img src="{{currentPost.img}}" alt=""></a>
+                            <div class="divider"></div>
+                            <div class="description">
+                                Enjoy this article? {{currentPost.author}} is an expert tutor in {{currentPost.subjects}}.<br /><br />
+                                <a href="{{currentPost.authorLink}}">Book a session with {{currentPost.author}}</a><br /><br />
+                                
+                                <!-- generate share links: http://www.sharelinkgenerator.com/ -->
+                                <div class="share-this-post" id="fbl">
+                                    SHARE! &nbsp;
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=gooroo.com/blog/{{currentPost.id}}" target="_blank"><img src="public/assets/img/blog/facebook.png" class="img-share"></a>
+                                    <a href="https://twitter.com/home?status=Hey,%20friends!%20Check%20out%20this%20blog%20post%3A%20gooroo.com/blog/{{currentPost.id}}" target="_blank"><img src="public/assets/img/blog/twitter.png" class="img-share"></a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=gooroo.com/blog/{{currentPost.id}}&title={{currentPost.encTitle}}&summary=&source=gooroo.com/blog/" target="_blank"><img src="public/assets/img/blog/linkedin.png" class="img-share"></a>
+                                    <a href="mailto:?&subject={{currentPost.title}}&body=Hi!%20Check%20out%20this%20interesting%20blog%20post%3A%20gooroo.com/blog/{{currentPost.id}}" target="_blank"><img src="public/assets/img/blog/email.png" class="img-share"></a>
+                                    <br />
+                                    <div class="fb-like" data-href="https://gooroo.com/blog/{{currentPost.id}}" data-width="40px" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+                                    <div id="fbl"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="photo-part" ng-if="!currentPost.authorLink">
+                            <img src="{{currentPost.img}}" alt="" ng-if="currentPost.img">
+                            <div class="divider"></div>
+                            <div class="no-pic-description" ng-if="!currentPost.img">
+                                Enjoy this post?<br /><br />
+                                <div class="share-this-post" id="fbl">
+                                    SHARE! &nbsp;
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=gooroo.com/blog/{{currentPost.id}}" target="_blank"><img src="public/assets/img/blog/facebook.png" class="img-share"></a>
+                                    <a href="https://twitter.com/home?status=Hey,%20friends!%20Check%20out%20this%20blog%20post%3A%20gooroo.com/blog/{{currentPost.id}}" target="_blank"><img src="public/assets/img/blog/twitter.png" class="img-share"></a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=gooroo.com/blog/{{currentPost.id}}&title={{currentPost.encTitle}}&summary=&source=gooroo.com/blog/" target="_blank"><img src="public/assets/img/blog/linkedin.png" class="img-share"></a>
+                                    <a href="mailto:?&subject={{currentPost.title}}&body=Hi!%20Check%20out%20this%20interesting%20blog%20post%3A%20gooroo.com/blog/{{currentPost.id}}" target="_blank"><img src="public/assets/img/blog/email.png" class="img-share"></a>
+                                    <br />
+                                    <div class="fb-like" data-href="https://gooroo.com/blog/{{currentPost.id}}" data-width="40px" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+                                    <div id="fbl"></div>
+                                </div>
+                            </div>
+                            <div class="description" ng-if="currentPost.img">
+                                Enjoy this post?<br /><br />
+                                <div class="share-this-post" id="fbl">
+                                    SHARE! &nbsp;
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=gooroo.com/blog/{{currentPost.id}}" target="_blank"><img src="public/assets/img/blog/facebook.png" class="img-share"></a>
+                                    <a href="https://twitter.com/home?status=Hey,%20friends!%20Check%20out%20this%20blog%20post%3A%20gooroo.com/blog/{{currentPost.id}}" target="_blank"><img src="public/assets/img/blog/twitter.png" class="img-share"></a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=gooroo.com/blog/{{currentPost.id}}&title={{currentPost.encTitle}}&summary=&source=gooroo.com/blog/" target="_blank"><img src="public/assets/img/blog/linkedin.png" class="img-share"></a>
+                                    <a href="mailto:?&subject={{currentPost.title}}&body=Hi!%20Check%20out%20this%20interesting%20blog%20post%3A%20gooroo.com/blog/{{currentPost.id}}" target="_blank"><img src="public/assets/img/blog/email.png" class="img-share"></a>
+                                    <br />
+                                    <div class="fb-like" data-href="https://gooroo.com/blog/{{currentPost.id}}" data-width="40px" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+                                    <div id="fbl"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <div class="box">
+                    <div class="comment-title">
+                        Leave a Comment!
+                    </div>
+                    <div class="fb-comments comments" id="web-only" data-href="https://gooroo.com/blog/{{currentPost.id}}" data-width="700px" data-numposts="5"></div>
+                    <div class="fb-comments comments" id="mobile-only" data-href="https://gooroo.com/blog/{{currentPost.id}}" data-width="150px" data-numposts="5"></div>
+                    <div id="fbc"></div>
+                </div>
+            </div>   
+        </div>
+    </div>
+</div>
