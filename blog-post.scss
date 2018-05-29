@@ -1,0 +1,193 @@
+#blog-post {
+    @extend .photo-header-page-common;
+    p{
+        line-height: 1.5;
+    }
+    h{
+        font-weight: bold;
+        font-size: 20px;
+        color: #069ec4;
+        @media only screen and (max-width: 576px){
+            font-size: 14pt;
+        }
+        white-space: nowrap;
+    }
+    .main{
+        background-color: white;
+    }
+    .box{
+        @extend .shadowed-box;
+        padding: 43px 0 56px 0;
+        .title{
+            font-weight: bold;
+            font-size: 36pt;
+            color: #3d3d3d;
+            text-align: left;
+            @media only screen and (min-width: 576px){
+                font-size: 18pt;
+            }
+        }
+
+        .headline{
+            font-size: 28px;
+            color: #3d3d3d;
+            font-weight: bold;
+        }
+
+        .date{
+            font-size: 16px;
+            color: #6e6e6e;
+            font-style: italic;
+        }
+
+        .main-text{
+            font-size: 16px;
+            color: #3d3d3d;
+            @media only screen and (max-width: 576px){
+                font-size: 12pt;
+            }
+
+            img{
+                float: left;
+                margin-right: 20px;
+                margin-bottom: 10px;
+            }
+            // for right-aligned profile pic and quotee (i.e. How I Got Into a Top College)
+            .prof-img{
+                display: inline-flex;
+                border-radius: 100px;
+                width: 90px;
+                height: 90px;
+                // margin-left: 40px;
+                border: 4px solid #069ec4;
+                @media only screen and (max-width: 576px){
+                    width: 70px;
+                    height: 70px;
+                    border: 2px solid #069ec4;
+                    margin-left: 0px;
+                }
+            }
+            .quotee{
+                padding-left: 5em;
+            }   
+        }
+        
+        blockquote{
+            font-family: Georgia;
+            font-size: 30px;
+            color: #069ec4;
+            font-weight: bold;
+            font-style: italic;
+            text-align: center;
+        }
+
+        quote{
+            font-family: Georgia;
+            font-size: 18px;
+            color: #069ec4;
+            font-weight: bold;
+            font-style: italic;
+        }
+    }
+
+    // .specialDescription{
+    //     padding-left: 15px;
+    //     padding-right: 15px;
+    //     // @media only screen and (max-width: 576px){
+    //     //     padding-left: 45px;
+    //     //     padding-right: 45px;
+    //     // }
+    // }
+
+    .feature-author{
+        @extend .box;
+
+        .photo-part{
+            display: inline-flex;
+            margin: 45px 0;
+            img{
+                border-radius: 100px;
+                width: 115px;
+                height: 115px;
+                margin-right: 55px;
+            }
+            .divider{
+                border-left: 3px solid $gooroo-blue;
+            }
+            .description{
+                font-size: 16px;
+                color: #3d3d3d;
+                font-weight: normal;
+                font-style: italic;
+                align-self: left;
+                padding-left: 41px;
+            }
+            .no-pic-description{
+                font-size: 18px;
+                color: #3d3d3d;
+                font-style: italic;
+                align-self: left;
+                padding-left: 41px;
+            }
+        }
+        .share-this-post{
+            font-size: 18px;
+            color: #3d3d3d;
+            font-weight: bold;
+            align-self: left;
+            white-space: nowrap;
+                .img-share {
+                    width: 6%;
+                    height: 6%;
+                    padding-right: 1px;
+                    margin: 0;
+                }
+        }
+
+        @media only screen and (max-width: 767px){
+            .photo-part{
+                display: block;
+                img{
+                    display: inline-block;
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 100%;
+                    -webkit-border-radius: 100%;
+                    -moz-border-radius: 100%;
+                    box-shadow: 0, 2px, 4px, 0 #b2aea6;
+                    vertical-align: middle;
+                    display: inline-flex;
+                    top: 50%;
+                    left: 50%;
+                    margin: 25% 15%;
+                    overflow: hidden;
+                }
+                .divider{
+                    border-top: 3px solid $gooroo-blue;
+                    margin: 0 auto;
+                    width: 50px;
+                }
+                .description{
+                    text-align: left;
+                    padding-left: 0;
+                    margin: 20px auto;
+                }
+            }
+        }
+    }
+
+    #web-only{
+        @media only screen and (max-width: 576px){
+            display: none;
+        }
+    }
+    #mobile-only{
+        @media only screen and (min-width: 576px){
+            display: none;
+        }
+    }
+    #mobile-pic{
+        height: 50%;
+        width: 50%;
+    }
+}
